@@ -53,6 +53,10 @@ class MediumArticleCollector:
         return element
 
     def get_next_author_URL(self):
+        """
+        A generator that reads the file with the list of authors and returns
+        author URLs one by one. 
+        """
         f = open(AUTHORS_FILE, 'r')
         while True:
             author_URL = f.readline()
