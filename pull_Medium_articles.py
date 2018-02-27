@@ -242,7 +242,6 @@ class MediumArticleCollector:
         folders = self.to_file_string(os.path.join(ARTICLES_FOLDER, article['author']))
         m = re.search('.*/(?P<file>.*)\?', article['url'])
         file = os.path.join(folders, m.group('file')+'.json')
-#        file = self.to_file_string(os.path.join(folders, unidecode(article['headline'])+'.json'))
         if not(os.path.exists(folders)):
             os.makedirs(folders)
         with open(file, 'w') as f:
