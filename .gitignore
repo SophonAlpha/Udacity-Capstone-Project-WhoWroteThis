@@ -1,1 +1,4 @@
 research/
+*.pickle
+*.pickle_bak
+quote.txt
