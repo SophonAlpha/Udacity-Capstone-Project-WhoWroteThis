@@ -1,4 +1,7 @@
 research/
 *.pickle
 *.pickle_bak
-quote.txt
+GoogleNews-vectors-negative300.bin
+glove.42B.300d.zip
+glove.6B.zip
+*.h5
