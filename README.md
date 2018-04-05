@@ -5,6 +5,8 @@ When writing, authors leave distinctive marks in their stories influenced by the
 
 In this project we will explore to what extend machine learning techniques can learn the style of writing for a set of authors. A learned system would then be given a text not seen before and tries to predict who the author is.
 
+![Drawing](notebook/prediction.png)
+
 ## Getting Started
 
 Just run `WhoWroteThis.ipynb`
