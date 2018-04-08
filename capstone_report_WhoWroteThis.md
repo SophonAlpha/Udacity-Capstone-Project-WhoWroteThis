@@ -88,38 +88,6 @@ Developing a web scraper script poses its own challenges. The initial idea is pr
 
 In defense for Selenium, it needs to be noted that Selenium first and foremost is a tool to automate testing of websites and not a tool for scaping several thousand websites. The primary goal behind the `pull_Medium_articles.py` script was to get the data for this capstone project and not to develop a sophisticated web scraper. In this respect Selenium did the job. Despite the challenges, developing the web scraper script has been a worthwhile learing experience. It provided an opportunity to develop practical experience around data acquisition.
 
-### Exploratory Visualization
-
-All articles have been downloaded in individual text files and into folders for each author. This folder and file structure has been archived into `Medium_articles.zip`. For an an overview about the data set we will list the number of articles for each author.
-
-| author            | number of articles |
-| ----------------- | ------------------ |
-| Nicole Dieker     | 1948               |
-| Fabricio Teixeira | 1733               |
-| Ester Bloom       | 1328               |
-|  Ethan Siegel 	|1323         |
-| Yann Girard 	    |1042|
-| Pascal Finette 	|1020|
-| Jon Westenberg 🌈 |932|
-| Chris Messina 	|872|
-| Mark Suster 	    |825|
-| howardlindzon 	|795|
-| umair haque 	    |688|
-| James Altucher 	|680|
-| Johnson Kee 	    |660|
-| Larry Kim 	    |619|
-| Sean Everett 	    |558|
-| Tim Boucher 	    |451|
-| M.G. Siegler 	    |377|
-| Nir Eyal 	        |366|
-| Srinivas Rao 	    |355|
-| Brad Feld 	    |350|
-| Todd Brison 	    |340|
-|Thaddeus Howze 	|339|
-|Jean-Louis Gassée 	|337|
-|Ted Rheingold 	    |319|
-|Gary Vaynerchuk 	|307|
-
 Our web scaper has downloaded the articles in one file for each article. Each article is encoded in JSON format with four attributes: "url", "author", "headline" and "body". Below is an example of one article.
 
 ```json
@@ -128,6 +96,48 @@ Our web scaper has downloaded the articles in one file for each article. Each ar
  "headline": "1 is the Loneliest Number That You\u2019ll Ever Do \u2026",
  "body": "1 is the Loneliest Number That You\u2019ll Ever Do \u2026\nThursday is a great day to do that 1 thing you don\u2019t want to do but also don\u2019t want to continue thinking about doing.\nThe thing I really should do is go to my stupid health insurance webpage and find a stupid doctor to take care of a small but annoying problem. It\u2019s the kind of problem that surfaced LAST YEAR just before my family\u2019s 7-week Great Escape and I waited for it to go away on its own as we made our way through two or three different countries, until I finally limped into a Spanish hospital and begged for help. A punctual, kind, and handsome, though sadly not very English-speaking, doctor gave me a temporary fix, and then said I\u2019d need to get real attention once I returned to the States.\nOf course, I didn\u2019t. Now that it\u2019s summer again the problem is getting harder to ignore. I hate bureaucracy and the thought of maybe having to have surgery (!) and not being able to walk (!!) so I just keep putting it off. But. Today I will change all that. Today I will find and call a doctor. Today I will DO 1 THING.\nHow about you?"}
 ```
+
+All articles have been downloaded in individual text files and into folders for each author. This folder and file structure has been archived into `Medium_articles.zip`. For an an overview about the data set we will list the number of articles for each author.
+
+| author            | number of articles |
+| ----------------- | ------------------ |
+| Nicole Dieker     | 1948               |
+| Fabricio Teixeira | 1733               |
+| Ester Bloom       | 1328               |
+| Ethan Siegel      | 1323               |
+| Yann Girard       | 1042               |
+| Pascal Finette    | 1020               |
+| Jon Westenberg 🌈  | 932                |
+| Chris Messina     | 872                |
+| Mark Suster       | 825                |
+| howardlindzon     | 795                |
+| umair haque       | 688                |
+| James Altucher    | 680                |
+| Johnson Kee       | 660                |
+| Larry Kim         | 619                |
+| Sean Everett      | 558                |
+| Tim Boucher       | 451                |
+| M.G. Siegler      | 377                |
+| Nir Eyal          | 366                |
+| Srinivas Rao      | 355                |
+| Brad Feld         | 350                |
+| Todd Brison       | 340                |
+| Thaddeus Howze    | 339                |
+| Jean-Louis Gassée | 337                |
+| Ted Rheingold     | 319                |
+| Gary Vaynerchuk   | 307                |
+
+As seen above in the table with the number of articles per authors the data set is skewed. The number of articles ranges from 1,948 for Nicole Dieker to 307 for Gary Vaynerchuk. To avoid that our system develops a bias towards authors with a high number of articles we will balance the data set. This will be done by keeping the number of articles for each author equal to the author with the lowest number of articles.
+
+Going forward we will work with 307 articles for each author.
+
+### Exploratory Visualization
+
+To get some first insight into the data set we will plot a histogram for each author that shows the distribution of article lengths.
+
+![Top Authors](notebook/article_length_distribution.png)
+
+From the chart above we can already see differences between the various authors. We see, for example, Yann Girard and Chris Messina have a preference for shorter articles (less then 250 words) whereas the majority of articles of Ethan Siegel and Thaddeus Howze has a length between 1,000 and 2,000 words.
 
 ### Algorithms and Techniques
 
