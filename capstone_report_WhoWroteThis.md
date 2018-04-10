@@ -8,6 +8,10 @@ April 4th, 2018
 
 When writing, authors leave distinctive marks in their stories influenced by the style of their writing. Well know writers are famous for their techniques with which they express ideas and manipulate language. Erika Rasso published a well written introduction to [Famous Authors and Their Writing Styles](https://www.craftyourcontent.com/famous-authors-writing-styles/). We learn, for example, that Ernest Hemingway "pioneered concise, objective prose in fiction—which had, up until then, primarily been used in journalism.". Another author discussed in Rasso's article is Franz Kafka. His stories present "surrealist, nightmarish writing in contemporary settings" which invoke feelings of confusion and helplessness. Agatha Christie's style was influenced by "mentions of war". Furthermore, "she utilized a variety of poisons to carry out the murders in her stories". And being interested in archarology "resulted in ancient artifacts and archaeologists being heavily featured in her novels". A last author worthwhile to highlight here is Zora Neale Hurston. Her style is quite unique: "She wrote in colloquial Southern dialects that mimicked the language she grew up hearing.".
 
+![Drawing](notebook/patrick-tomasso-71909-unsplash v2.jpg)
+
+Photo by [Patrick Tomasso](https://unsplash.com/photos/Oaqk7qqNh_c?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/search/photos/text-page?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+
 Our intuition and experience as readers tells us that the style of writing is like a "finger print" that differentiates authors. If we come across a text with no information about the author or a text written under a preudonym, would we be able to tell the author based of the style of writing? An interesting article in this direction has been published by Carole E. Chaski: ["Who’s At The Keyboard? Authorship Attribution in Digital Evidence Investigations"](http://localhost:8889/notebooks/GitHub/Udacity-Capstone-Project-WhoWroteThis/www.utica.edu/academic/institutes/ecii/publications/articles/B49F9C4A-0362-765C-6A235CB8ABDFACFF.pdf) . The article discusses the question to what extend text can be attributed to an author as part of crime investigations.
 
 ### Problem Statement
@@ -88,7 +92,7 @@ Developing a web scraper script poses its own challenges. The initial idea is pr
 
 In defense for Selenium, it needs to be noted that Selenium first and foremost is a tool to automate testing of websites and not a tool for scaping several thousand websites. The primary goal behind the `pull_Medium_articles.py` script was to get the data for this capstone project and not to develop a sophisticated web scraper. In this respect Selenium did the job. Despite the challenges, developing the web scraper script has been a worthwhile learing experience. It provided an opportunity to develop practical experience around data acquisition.
 
-Our web scaper has downloaded the articles in one file for each article. Each article is encoded in JSON format with four attributes: "url", "author", "headline" and "body". Below is an example of one article.
+Our web scaper has downloaded the articles in one file for each article. Each article is encoded in JSON format with four attributes: "url", "author", "headline" and "body". Below is an example for one article.
 
 ```json
 {"url": "https://medium.com/the-billfold/1-is-the-loneliest-number-that-you-ll-ever-do-406f496b87c0?source=user_profile---------1193----------------",
@@ -97,7 +101,7 @@ Our web scaper has downloaded the articles in one file for each article. Each ar
  "body": "1 is the Loneliest Number That You\u2019ll Ever Do \u2026\nThursday is a great day to do that 1 thing you don\u2019t want to do but also don\u2019t want to continue thinking about doing.\nThe thing I really should do is go to my stupid health insurance webpage and find a stupid doctor to take care of a small but annoying problem. It\u2019s the kind of problem that surfaced LAST YEAR just before my family\u2019s 7-week Great Escape and I waited for it to go away on its own as we made our way through two or three different countries, until I finally limped into a Spanish hospital and begged for help. A punctual, kind, and handsome, though sadly not very English-speaking, doctor gave me a temporary fix, and then said I\u2019d need to get real attention once I returned to the States.\nOf course, I didn\u2019t. Now that it\u2019s summer again the problem is getting harder to ignore. I hate bureaucracy and the thought of maybe having to have surgery (!) and not being able to walk (!!) so I just keep putting it off. But. Today I will change all that. Today I will find and call a doctor. Today I will DO 1 THING.\nHow about you?"}
 ```
 
-All articles have been downloaded in individual text files and into folders for each author. This folder and file structure has been archived into `Medium_articles.zip`. For an an overview about the data set we will list the number of articles for each author.
+All articles have been downloaded in individual text files and into folders for each author. This folder and file structure has been archived into `Medium_articles.zip`. For an an overview about the data set the table below list the number of articles for each author.
 
 | author            | number of articles |
 | ----------------- | ------------------ |
@@ -127,7 +131,7 @@ All articles have been downloaded in individual text files and into folders for 
 | Ted Rheingold     | 319                |
 | Gary Vaynerchuk   | 307                |
 
-As seen above in the table with the number of articles per authors the data set is skewed. The number of articles ranges from 1,948 for Nicole Dieker to 307 for Gary Vaynerchuk. To avoid that our system develops a bias towards authors with a high number of articles we will balance the data set. This will be done by keeping the number of articles for each author equal to the author with the lowest number of articles.
+The number of articles per authors in the data set is skewed. The number of articles ranges from 1,948 for Nicole Dieker to 307 for Gary Vaynerchuk. To avoid that our system develops a bias towards authors with a high number of articles we will balance the data set. This will be done by keeping the number of articles for each author equal to the author with the lowest number of articles.
 
 Going forward we will work with 307 articles for each author.
 
@@ -164,6 +168,62 @@ We will implement the following models that will utilize various combinations of
   Based on this promising outlook we will test the word embeddings approach on our problem. Model 8 will learn word embeddings as part of the convolutional neural network (CNN).
 
 - **Model 9 GloVe Word Embeddings & CNN:** In this model we will utilize pre-trained word embeddings from the [GloVe algorithm](https://nlp.stanford.edu/projects/glove/). This is done based on the hypothesis that the GloVe word embeddings will provide much more accurate representations of word relationships than what we can train with our limited training data set.
+
+
+
+http://www.wildml.com/2015/11/understanding-convolutional-neural-networks-for-nlp/
+
+Convolutions and pooling operations lose information about the local order of words
+
+The approach in these papers seems to work well for long-form texts 
+(like movie reviews), but their performance on short texts (like tweets)
+ isn’t clear.
+
+CNN
+
+To use a CNN for a NLP problem it is required to transform the text in articles into a numerical matrix representation. In our models 8 & 9 each row in the matrix will represent a word. Words are represented as word embeddings vectors. Word embeddings are vectors with tens or several hundred dimensions. These vectors are learned by processing a large amount of text through a neural network. During learning, the algorithm learns the embedding either by predicting the current word based on its context or by predicting the surrounding words given a current word. The result of the embeddings learning phase is a set of vectors where words with similar meanings have similar vectors. Essentially "similarness" is represented by the distance between word vectors. The vector representations of words with similar meanings have shorter distances between them.
+
+<add image example for word to matrix transformation, https://www.draw.io/>
+
+In our CNN model we will utilize pre-trained word embeddings from the [GloVe algorithm](https://nlp.stanford.edu/projects/glove/). The pre-trained datasets are available with 50, 100, 200 and 300 dimensional word vectors. For our model 9 we will use the 300 dimension version. When configuring a CNN's we are requires to specify the dimensions of the input layer. Once defined these dimension will be fixed throughout the lifetime of the CNN. This requires the input data to be normalized to the dimensions of the input layer. In computer vision, if the training images are of varying dimensions, this proves less of an issue. Images can be resized to the required dimensions of the input layer and will still preserve key information in the images. In our case, where the input data are articles of varying length, the fixed dimensions of the input layer poses a problem. Unfortunately there is no equivalent to resizing an image for text. One approach to address this would be to arbitrarily define a maximum length for articles. All words beyond that length are discarded. This obviously has the disadvantage that key information for learning an authors style of writing is lost with the discarded portion. A second approach might be to split articles into fixed length "sub-articles". These sub-articles then replace the original long article in the data set. The advantage of this approach is that information is not lost. However, a side effect is that this might skew the training data set. As outlined in the Data Exploration section above we deliberately prepared the datat set so that there is an equal number of articles for each author to avoid that our model to develop a bias towards authors with a high number of articles. If we are now splitting long articles into smaller sub-articles we might reintroduce the imbalance. The last approach would be to use the length of the longest article in the training data set as the number of rows for the input layer. This ensures all training article will fit into the embeddings layer.
+
+
+
+The first layer will be an embeddings layer with 300 columns, representing the 300 dimensions of the word vectors. The number of rows will be determined by the length of the longest article in the training data set.
+
+```python
+model = Sequential()
+model.add(embedding)
+model.add(Conv1D(filters=32, kernel_size=8, activation='relu'))
+model.add(MaxPooling1D(pool_size=2))
+model.add(Flatten())
+model.add(Dense(10, activation='relu'))
+model.add(Dense(25, activation='softmax'))
+model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['acc'])
+model.summary()
+
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+embedding_1 (Embedding)      (None, 12580, 100)        7629000   
+_________________________________________________________________
+conv1d_1 (Conv1D)            (None, 12573, 32)         25632     
+_________________________________________________________________
+max_pooling1d_1 (MaxPooling1 (None, 6286, 32)          0         
+_________________________________________________________________
+flatten_1 (Flatten)          (None, 201152)            0         
+_________________________________________________________________
+dense_1 (Dense)              (None, 10)                2011530   
+_________________________________________________________________
+dense_2 (Dense)              (None, 25)                275       
+=================================================================
+Total params: 9,666,437
+Trainable params: 9,666,437
+Non-trainable params: 0
+```
+
+
+
 
 ### Benchmark
 To assess the quality of the predictions of the models described above we will need to compare against some baseline. In our case we will simply do a random guess of who the author of an article is. This should get us in the order of $\frac{1}{n}\cdot100$ percent accuracy, where $n$ represents the number of authors in the dataset.
